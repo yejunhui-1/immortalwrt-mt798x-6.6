@@ -27,6 +27,14 @@ preinit_set_mac_address() {
 		ip link set dev eth0 address "$addr"
 		ip link set dev eth1 address "$addr"
 		;;
+	honor,fur-602)
+		addr=$(mtd_get_mac_binary "Factory" 0x4)
+		[ -n "$addr" ] && {
+			ip link set dev eth0 down
+			ip link set dev eth0 address "$addr"
+			ip link set dev eth0 up
+		}
+		;;
 	mercusys,mr90x-v1|\
 	tplink,re6000xd)
 		addr=$(get_mac_binary "/tmp/tp_data/default-mac" 0)

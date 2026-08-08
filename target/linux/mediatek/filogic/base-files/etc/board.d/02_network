@@ -46,6 +46,7 @@ mediatek_setup_interfaces()
 	*Airpi*)
                 ucidef_set_interfaces_lan "eth0 eth1"
 		;;
+	honor,fur-602|\
 	asus,rt-ax52|\
 	asus,rt-ax59u|\
 	cetron,ct3003|\
@@ -287,6 +288,11 @@ mediatek_setup_macs()
 	umi,uax3000e)
 		lan_mac=$(mmc_get_mac_binary factory 0x2A)
 		wan_mac=$(mmc_get_mac_binary factory 0x04)
+		;;
+	honor,fur-602)
+		label_mac=$(mtd_get_mac_binary "Factory" 0x4)
+		wan_mac=$label_mac
+		lan_mac=$(mtd_get_mac_binary "Factory" 0xa)
 		;;
 	yuncore,ax835)
 		label_mac=$(mtd_get_mac_binary "Factory" 0x4)
