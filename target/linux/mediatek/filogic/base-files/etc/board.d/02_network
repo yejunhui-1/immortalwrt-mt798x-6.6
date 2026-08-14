@@ -65,6 +65,7 @@ mediatek_setup_interfaces()
 	creatlentem,clt-r30b1-ubi|\
 	cudy,wr3000-v1|\
 	globitel,bt-r320|\
+	honor,fur-602|\
 	huasifei,wh3000r-nand|\
 	jcg,q30-pro|\
 	keenetic,kn-3711|\
@@ -347,6 +348,11 @@ mediatek_setup_macs()
 	tplink,fr365-v1)
 		lan_mac=$(strings /dev/mtd11 | grep 'option macaddr' | awk -F"'" '{print $2}')
 		wan_mac="$(macaddr_add $lan_mac 1)"
+		;;
+	honor,fur-602)
+		label_mac=$(mtd_get_mac_binary "Factory" 0x4)
+		wan_mac=$label_mac
+		lan_mac=$(mtd_get_mac_binary "Factory" 0xa)
 		;;
 	xiaomi,mi-router-ax3000t|\
 	xiaomi,mi-router-ax3000t-ubootmod|\

@@ -53,6 +53,14 @@ preinit_set_mac_address() {
 		ip link set dev port5 address "$lan_mac"
 		ip link set dev port6 address "$lan_mac"
 		;;
+	honor,fur-602)
+		addr=$(mtd_get_mac_binary "Factory" 0x4)
+		[ -n "$addr" ] && {
+			ip link set dev eth0 down
+			ip link set dev eth0 address "$addr"
+			ip link set dev eth0 up
+		}
+		;;
 	*)
 		;;
 	esac
