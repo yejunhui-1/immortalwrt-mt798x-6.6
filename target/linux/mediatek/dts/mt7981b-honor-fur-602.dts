@@ -189,7 +189,7 @@
 
 			factory: partition@180000 {
 				label = "Factory";
-				reg = <0x180000 0x200000>;
+				reg = <0x180000 0x1e0000>;
 
 				nvmem-layout {
 					compatible = "fixed-layout";
@@ -202,6 +202,11 @@
 				};
 			};
 
+			partition@360000 {
+				label = "Trace";
+				reg = <0x360000 0x20000>;
+			};
+
 			partition@380000 {
 				label = "FIP";
 				reg = <0x380000 0x200000>;
@@ -209,13 +214,8 @@
 			};
 
 			partition@580000 {
-				label = "Trace";
-				reg = <0x580000 0x20000>;
-			};
-
-			partition@5a0000 {
 				label = "ubi";
-				reg = <0x5A0000 0xEA60000>;
+				reg = <0x580000 0xEA80000>;
 			};
 		};
 	};
